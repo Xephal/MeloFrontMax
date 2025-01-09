@@ -3,10 +3,9 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  standalone: true,
+  imports: [RouterOutlet], // Importe RouterOutlet pour utiliser <router-outlet>
+  template: `<router-outlet></router-outlet>`, // Affiche le composant basé sur la route
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'FilRouge';
-}
+export class AppComponent {}

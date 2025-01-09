@@ -1,0 +1,18 @@
+<h1>Transactions</h1>
+<form (submit)="addTransaction(recipientInput.value, amountInput.valueAsNumber, reasonInput.value); $event.preventDefault();">
+  <input #recipientInput type="text" placeholder="Destinataire" required />
+  <input #amountInput type="number" placeholder="Montant" required />
+  <input #reasonInput type="text" placeholder="Motif" required />
+  <button type="submit">Ajouter</button>
+</form>
+
+<ul>
+  <li *ngFor="let transaction of (transactions$ | async)">
+    Destinataire : {{ transaction.recipient }} <br />
+    Montant : {{ transaction.amount | currency }} <br />
+    Motif : {{ transaction.reason }}
+  </li>
+</ul>
+
+<button (click)="clearTransactions()">Effacer toutes les transactions</button>
+
