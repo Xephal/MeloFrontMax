@@ -1,19 +1,30 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TransactionsViewModel } from './transactions.viewmodel';
+import { Component } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { TransactionsViewModel } from "./transactions.viewmodel";
 
 @Component({
-  selector: 'app-transactions',
+  selector: "app-transactions",
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './transactions.component.html',
-  styleUrls: ['./transactions.component.css']
+  imports: [CommonModule, FormsModule],
+  templateUrl: "./transactions.component.html",
+  styleUrls: ["./transactions.component.css"]
 })
 export class TransactionsComponent {
   transactions$;
+  editTransaction: any = null;
 
-  constructor(private vm: TransactionsViewModel) {
+  constructor(public vm: TransactionsViewModel) {
     this.transactions$ = this.vm.transactions$;
+  }
+
+  selectTransaction(transaction: any): void {
+    this.editTransaction = { ...transaction };
+  }
+
+  updateTransaction(transaction: any): void {
+    this.vm.updateTransaction(transaction);
+    this.editTransaction = null;
   }
 
   addTransaction(recipient: string, amount: number, reason: string): void {
@@ -22,5 +33,5 @@ export class TransactionsComponent {
 
   clearTransactions(): void {
     this.vm.clearTransactions();
-  }  
+  }
 }

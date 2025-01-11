@@ -7,12 +7,20 @@
 </form>
 
 <ul>
-  <li *ngFor="let transaction of (transactions$ | async)">
+  <li *ngFor="let transaction of transactions$ | async">
     Destinataire : {{ transaction.recipient }} <br />
     Montant : {{ transaction.amount | currency }} <br />
-    Motif : {{ transaction.reason }}
+    Motif : {{ transaction.reason }} <br />
+    <button (click)="selectTransaction(transaction)">Modifier</button>
   </li>
 </ul>
 
-<button (click)="clearTransactions()">Effacer toutes les transactions</button>
+<div *ngIf="editTransaction">
+  <h3>Modifier la transaction</h3>
+  <input [(ngModel)]="editTransaction.recipient" placeholder="Destinataire" />
+  <input [(ngModel)]="editTransaction.amount" type="number" placeholder="Montant" />
+  <input [(ngModel)]="editTransaction.reason" placeholder="Motif" />
+  <button (click)="updateTransaction(editTransaction)">Mettre à jour</button>
+</div>
 
+<button (click)="clearTransactions()">Effacer toutes les transactions</button>

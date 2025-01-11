@@ -1,5 +1,5 @@
-import { createReducer, on } from '@ngrx/store';
-import { addTransaction, loadTransactionsSuccess } from './transactions.actions';
+﻿import { createReducer, on } from '@ngrx/store';
+import { addTransaction, loadTransactionsSuccess, updateTransaction } from './transactions.actions';
 import { Transaction } from '../../domain/transaction.entity';
 
 export interface TransactionState {
@@ -19,5 +19,9 @@ export const transactionsReducer = createReducer(
   on(loadTransactionsSuccess, (state, { transactions }) => ({
     ...state,
     transactions
+  })),
+  on(updateTransaction, (state, { transaction }) => ({
+    ...state,
+    transactions: state.transactions.map(t => t.id === transaction.id ? transaction : t)
   }))
 );

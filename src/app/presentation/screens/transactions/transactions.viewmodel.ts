@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+﻿import { Injectable, Inject } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Transaction } from '../../../core/domain/transaction.entity';
 import { TRANSACTION_REPOSITORY } from '../../../core/tokens/transaction-repository.token';
@@ -31,15 +31,21 @@ export class TransactionsViewModel {
     });
   }
 
-  private loadTransactions(): void {
-    this.transactionRepository.getAll().subscribe((transactions: Transaction[]) => {
-      this.transactionsSubject.next(transactions);
+  updateTransaction(transaction: Transaction): void {
+    this.transactionRepository.update(transaction).subscribe(() => {
+      this.loadTransactions(); // Recharge les transactions après modification
     });
   }
 
   clearTransactions(): void {
-    this.transactionRepository.clearAll(); // Vide le LocalStorage
+    this.transactionRepository.clearAll(); // Vide le LocalStorage ou la source de données
     this.transactionsSubject.next([]); // Vide les transactions affichées
+  }
+
+  private loadTransactions(): void {
+    this.transactionRepository.getAll().subscribe((transactions: Transaction[]) => {
+      this.transactionsSubject.next(transactions);
+    });
   }
 
   private generateId(): string {
