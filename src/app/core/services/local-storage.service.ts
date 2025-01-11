@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Transaction } from "../domain/transaction.entity";
+import { deleteTransaction } from "../store/transactions/transactions.actions";
 
 @Injectable({
   providedIn: "root",
@@ -19,6 +20,11 @@ export class LocalStorageService {
   }
 
   saveAllTransactions(transactions: Transaction[]): void {
+    localStorage.setItem(this.key, JSON.stringify(transactions));
+  }
+
+  deleteTransaction(id: string): void {
+    const transactions = this.getTransactions().filter(transaction => transaction.id !== id);
     localStorage.setItem(this.key, JSON.stringify(transactions));
   }
 

@@ -31,6 +31,10 @@ export class TransactionsComponent {
     this.vm.addTransaction(recipient, amount, reason);
   }
 
+  deleteTransaction(id: string): void {
+    this.vm.deleteTransaction(id);
+  }
+
   clearTransactions(): void {
     this.vm.clearTransactions();
   }

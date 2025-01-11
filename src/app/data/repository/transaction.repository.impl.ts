@@ -29,6 +29,11 @@ export class TransactionRepositoryImpl implements TransactionRepository {
     return of(transaction); // Return updated transaction
   }
 
+  delete(id: string): Observable<void> {
+    this.localStorageService.deleteTransaction(id);
+    return of()
+  }
+
   clearAll(): void {
     this.localStorageService.clearTransactions();
   }

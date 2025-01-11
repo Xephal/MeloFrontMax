@@ -11,7 +11,8 @@
     Destinataire : {{ transaction.recipient }} <br />
     Montant : {{ transaction.amount | currency }} <br />
     Motif : {{ transaction.reason }} <br />
-    <button (click)="selectTransaction(transaction)">Modifier</button>
+    <button (click)="selectTransaction(transaction)">Modifier</button><br />
+    <button (click)="deleteTransaction(transaction.id)">Suppr.</button>
   </li>
 </ul>
 
@@ -20,7 +21,7 @@
   <input [(ngModel)]="editTransaction.recipient" placeholder="Destinataire" />
   <input [(ngModel)]="editTransaction.amount" type="number" placeholder="Montant" />
   <input [(ngModel)]="editTransaction.reason" placeholder="Motif" />
-  <button (click)="updateTransaction(editTransaction)">Mettre à jour</button>
+  <button (click)="updateTransaction(editTransaction)">Mettre ï¿½ jour</button>
 </div>
 
 <button (click)="clearTransactions()">Effacer toutes les transactions</button>

@@ -17,3 +17,8 @@ export const updateTransaction = createAction(
   '[Transactions] Update Transaction',
   props<{ transaction: Transaction }>()
 );
+
+export const deleteTransaction = createAction(
+  '[Transactions] Delete Transaction',
+  props<{id: string}>()
+)

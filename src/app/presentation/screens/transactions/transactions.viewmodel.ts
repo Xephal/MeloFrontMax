@@ -3,6 +3,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { Transaction } from '../../../core/domain/transaction.entity';
 import { TRANSACTION_REPOSITORY } from '../../../core/tokens/transaction-repository.token';
 import { TransactionRepository } from '../../../data/repository/transaction.repository';
+import { deleteTransaction } from 'src/app/core/store/transactions/transactions.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,12 @@ export class TransactionsViewModel {
   updateTransaction(transaction: Transaction): void {
     this.transactionRepository.update(transaction).subscribe(() => {
       this.loadTransactions(); // Recharge les transactions après modification
+    });
+  }
+
+  deleteTransaction(id: string): void {
+    this.transactionRepository.delete(id).subscribe(() => {
+      this.loadTransactions();
     });
   }
 
